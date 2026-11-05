@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkPlanner.Web.Models;
 
 namespace WorkPlanner.Web.Data
@@ -20,11 +21,11 @@ namespace WorkPlanner.Web.Data
 
             modelBuilder.Entity<TaskItem>()
                 .Property(t => t.Status)
-                .HasMaxLength(20);
+                .HasConversion<string>();
 
             modelBuilder.Entity<TaskItem>()
                 .Property(t => t.Priority)
-                .HasMaxLength(20);
+                .HasConversion<string>();
         }
     }
 }

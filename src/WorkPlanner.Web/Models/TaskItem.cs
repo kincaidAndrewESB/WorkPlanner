@@ -1,6 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 using System.Security;
+using WorkPlanner.Web.Enums;
 
 namespace WorkPlanner.Web.Models
 {
@@ -14,11 +15,9 @@ namespace WorkPlanner.Web.Models
         [StringLength(1000)]
         public string? Description { get; set; }
         [Required]
-        [StringLength(20)]
-        public string? Status { get; set; } = "New";
+        public Enums.TaskStatus Status { get; set; } = Enums.TaskStatus.New;
         [Required]
-        [StringLength(20)]
-        public string? Priority { get; set; } = "Medium";
+        public Enums.TaskPriority Priority { get; set; } = Enums.TaskPriority.Medium;
 
         public DateTime? DueDate { get; set; }
 
