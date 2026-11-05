@@ -5,6 +5,21 @@ VisualStudioVersion = 17.14.37411.7 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkPlanner.Web", "WorkPlanner.Web.csproj", "{FF1D89B8-97CF-403E-BFF2-8C7524C22842}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		docs\Architechture.md = docs\Architechture.md
+		docs\DatabaseDesign.md = docs\DatabaseDesign.md
+		docs\ReleaseRoadMap.md = docs\ReleaseRoadMap.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{10FD181A-2A43-4EE7-840B-31535BF5EA6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{CADEA713-134F-4D52-9DD3-2DB9EEBFC4AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tables", "Tables", "{0FEAB43B-20EB-4CDB-B591-57BA6445C725}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StoredProcedures", "StoredProcedures", "{710479DC-E2CE-46BF-8CFB-526F9FFED394}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +33,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FF1D89B8-97CF-403E-BFF2-8C7524C22842} = {10FD181A-2A43-4EE7-840B-31535BF5EA6A}
+		{0FEAB43B-20EB-4CDB-B591-57BA6445C725} = {CADEA713-134F-4D52-9DD3-2DB9EEBFC4AD}
+		{710479DC-E2CE-46BF-8CFB-526F9FFED394} = {CADEA713-134F-4D52-9DD3-2DB9EEBFC4AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD2F80F0-980C-44DC-9470-55422CA8DF58}
