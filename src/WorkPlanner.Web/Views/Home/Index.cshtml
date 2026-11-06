@@ -1,8 +1,64 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model WorkPlanner.Web.ViewModels.DashboardViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mb-5">
+    <h1>Work Planner</h1>
+    <p class="lead">
+        Organise and track your work effectively.
+    </p>
+</div>
+
+<div class="row">
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-primary">
+            <div class="card-body">
+                <h5>Total Tasks</h5>
+                <h2>@Model.TotalTasks</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-warning">
+            <div class="card-body">
+                <h5>Open Tasks</h5>
+                <h2>@Model.OpenTasks</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-success">
+            <div class="card-body">
+                <h5>Completed</h5>
+                <h2>@Model.CompletedTasks</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-danger">
+            <div class="card-body">
+                <h5>Overdue</h5>
+                <h2>@Model.OverdueTasks</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="mt-4">
+
+    <a asp-controller="Tasks"
+       asp-action="Create"
+       class="btn btn-primary">
+        Create New Task
+    </a>
+
+    <a asp-controller="Tasks"
+       asp-action="Index"
+       class="btn btn-secondary">
+        View All Tasks
+    </a>
+
 </div>

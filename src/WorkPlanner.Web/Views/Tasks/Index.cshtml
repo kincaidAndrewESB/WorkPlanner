@@ -1,81 +1,178 @@
+@*@model IEnumerable<WorkPlanner.Web.Models.TaskItem>*@
 @model IEnumerable<WorkPlanner.Web.Models.TaskItem>
+@using WorkPlanner.Web.Enums
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Task Manager</h1>
+@*<h1>Task Manager</h1>
 
-<p>
-    Manage and track your work items.
-</p>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Priority)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DueDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompletedDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <p>
+        Manage and track your work items.
+    </p>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
+
+<div class="d-flex justify-content-between mb-3">
+
+    <h1>Task Manager</h1>
+
+    <a asp-action="Create"
+       class="btn btn-primary">
+        New Task
+    </a>
+
+</div>
+
+@*<table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(model => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Priority)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.DueDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.CreatedDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.ModifiedDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.CompletedDate)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.TaskItemId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.TaskItemId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.TaskItemId">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Priority)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DueDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompletedDate)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Priority)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.DueDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.CreatedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.ModifiedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.CompletedDate)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.TaskItemId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.TaskItemId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.TaskItemId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        @item.Title
+                    </h5>
+
+                    <p class="card-text">
+                        @item.Description
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        <span class="badge
+                        @(item.Status switch
+                        {
+                            WorkPlanner.Web.Enums.TaskStatus.New => "bg-secondary",
+                             WorkPlanner.Web.Enums.TaskStatus.InProgress => "bg-primary",
+                             WorkPlanner.Web.Enums.TaskStatus.Blocked => "bg-danger",
+                             WorkPlanner.Web.Enums.TaskStatus.Completed => "bg-success",
+                            _ => "bg-dark"
+                        })">
+                            @item.Status
+                        </span>
+                    </p>
+
+                    <p>
+                        <strong>Priority:</strong>
+                        <span class="badge
+                            @(item.Priority switch
+                            {
+                                TaskPriority.Low => "bg-success",
+                                TaskPriority.Medium => "bg-info",
+                                TaskPriority.High => "bg-warning",
+                                TaskPriority.Critical => "bg-danger",
+                                _ => "bg-secondary"
+                            })">
+                            @item.Priority
+                        </span>
+                    </p>
+
+                    <p>
+                        <strong>Due:</strong>
+                        @(item.DueDate?.ToString("dd MMM yyyy"))
+                    </p>
+
+                </div>
+
+                <div class="card-footer">
+
+                    <a asp-action="Edit"
+                       asp-route-id="@item.TaskItemId"
+                       class="btn btn-sm btn-warning">
+                        Edit
+                    </a>
+
+                    <a asp-action="Details"
+                       asp-route-id="@item.TaskItemId"
+                       class="btn btn-sm btn-info">
+                        Details
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.TaskItemId"
+                       class="btn btn-sm btn-danger">
+                        Delete
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+</div>
