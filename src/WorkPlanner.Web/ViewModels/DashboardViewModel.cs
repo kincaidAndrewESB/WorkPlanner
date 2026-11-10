@@ -8,6 +8,8 @@
 
         public int CompletedTasks { get; set; }
 
+        public int DueToday { get; set; }
+
         public int OverdueTasks { get; set; }
     }
 }

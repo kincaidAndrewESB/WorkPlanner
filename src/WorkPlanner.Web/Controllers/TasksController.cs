@@ -15,14 +15,43 @@ public class TasksController : Controller
     }
 
     // GET: TASKITEMS
-    public async Task<IActionResult> Index()
-    {
-        var tasks = await _context.Tasks
-            .OrderBy(t => t.Status)
-            .ThenBy(t => t.DueDate)
-            .ToListAsync();
+    //public async Task<IActionResult> Index(string searchTerm)
+    //{
+    //    var tasks = _context.Tasks.AsQueryable();
 
-        return View(tasks);
+    //    if (!string.IsNullOrEmpty(searchTerm))
+    //    {
+    //        tasks = tasks.Where(t => t.Title.Contains(searchTerm) || (!string.IsNullOrEmpty(t.Description) && t.Description.Contains(searchTerm)));
+    //    }
+
+    //    return View(await tasks.OrderBy(t => t.Status).ThenBy(t => t.DueDate).ToListAsync());
+    //}
+
+    public async Task<IActionResult> Index(
+    string searchTerm,
+    WorkPlanner.Web.Enums.TaskStatus? status,
+    TaskPriority? priority)
+    {
+        var tasks = _context.Tasks.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+            tasks = tasks.Where(t =>
+                t.Title.Contains(searchTerm));
+        }
+
+        if (!string.IsNullOrEmpty(status.ToString()) && status.HasValue)
+        {
+            tasks = tasks.Where(t => t.Status == status);
+        }
+
+        if (priority.HasValue)
+        {
+            tasks = tasks.Where(t =>
+                t.Priority == priority);
+        }
+
+        return View(await tasks.ToListAsync());
     }
 
     // GET: TASKITEMS/Details/5
@@ -120,6 +149,24 @@ public class TasksController : Controller
             return RedirectToAction(nameof(Index));
         }
         return View(taskitem);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Complete(int id)
+    {
+        var task = await _context.Tasks.FindAsync(id);
+
+        if (task == null)
+        {
+            return NotFound();
+        }
+
+        task.Status = WorkPlanner.Web.Enums.TaskStatus.Completed;
+        task.CompletedDate = DateTime.Now;
+
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
     }
 
     // GET: TASKITEMS/Delete/5

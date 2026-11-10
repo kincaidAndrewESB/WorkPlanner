@@ -30,6 +30,10 @@ namespace WorkPlanner.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TaskItemId"));
 
+                    b.Property<int>("Category")
+                        .HasMaxLength(50)
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("CompletedDate")
                         .HasColumnType("datetime2");
 

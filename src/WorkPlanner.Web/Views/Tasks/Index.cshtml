@@ -26,6 +26,68 @@
 
 </div>
 
+<form method="get" class="mb-4">
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <input type="text"
+                   name="searchTerm"
+                   class="form-control"
+                   placeholder="Search tasks..." />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button class="btn btn-primary w-100">
+                Search
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <select name="status"
+                class="form-select">
+
+            <option value="">
+                All Statuses
+            </option>
+
+            @foreach (var status in Enum.GetValues<WorkPlanner.Web.Enums.TaskStatus>())
+            {
+                <option value="@status">
+                    @status
+                </option>
+            }
+
+        </select>
+    </div>
+
+    <div class="row">
+        <select name="priority"
+                class="form-select">
+
+            <option value="">
+                All Priorities
+            </option>
+
+            @foreach (var priority in Enum.GetValues<TaskPriority>())
+            {
+                <option value="@priority">
+                    @priority
+                </option>
+            }
+
+        </select>
+     </div>
+
+</form>
+
+
 @*<table class="table">
         <thead>
             <tr>
@@ -142,10 +204,17 @@
                         </span>
                     </p>
 
-                    <p>
+                    @*<p>
                         <strong>Due:</strong>
                         @(item.DueDate?.ToString("dd MMM yyyy"))
-                    </p>
+                        @if (item.DueDate < DateTime.Today &&
+                        item.Status != WorkPlanner.Web.Enums.TaskStatus.Completed)
+                        {
+                            <span class="badge bg-danger">
+                                OVERDUE
+                            </span>
+                        }
+                    </p>*@
 
                 </div>
 
@@ -162,6 +231,18 @@
                        class="btn btn-sm btn-info">
                         Details
                     </a>
+
+                    <form asp-action="Complete"
+                          asp-route-id="@item.TaskItemId"
+                          method="post"
+                          style="display:inline">
+
+                        <button type="submit"
+                                class="btn btn-success btn-sm">
+                            Complete
+                        </button>
+
+                    </form>
 
                     <a asp-action="Delete"
                        asp-route-id="@item.TaskItemId"

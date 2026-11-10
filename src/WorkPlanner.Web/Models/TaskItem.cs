@@ -14,6 +14,10 @@ namespace WorkPlanner.Web.Models
 
         [StringLength(1000)]
         public string? Description { get; set; }
+
+        [StringLength(50)]
+        public Enums.TaskCategory Category { get; set; } = Enums.TaskCategory.New;
+
         [Required]
         public Enums.TaskStatus Status { get; set; } = Enums.TaskStatus.New;
         [Required]

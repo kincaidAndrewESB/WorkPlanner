@@ -30,6 +30,8 @@ namespace WorkPlanner.Controllers
                             .Take(5)
                             .ToListAsync();
 
+            
+
             var model = new DashboardViewModel
             {
                 TotalTasks = await _context.Tasks.CountAsync(),

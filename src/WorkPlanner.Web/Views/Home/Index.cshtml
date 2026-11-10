@@ -45,7 +45,36 @@
         </div>
     </div>
 
+    <div class="card text-bg-info">
+
+        <div class="card-body">
+
+            <h5>Due Today</h5>
+
+            <h2>@Model.DueToday</h2>
+
+        </div>
+
+    </div>
+
 </div>
+
+<h3 class="mt-4">
+    Recent Tasks
+</h3>
+
+<ul class="list-group">
+
+    @foreach (var task in ViewBag.RecentTasks)
+    {
+        <li class="list-group-item">
+
+            @task.Title
+
+        </li>
+    }
+
+</ul>
 
 <div class="mt-4">
 
