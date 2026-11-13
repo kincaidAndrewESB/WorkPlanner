@@ -7,21 +7,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{02EA681E-C
 	ProjectSection(SolutionItems) = preProject
 		docs\Architecture.md = docs\Architecture.md
 		docs\DatabaseDesign.md = docs\DatabaseDesign.md
+		DatabaseObjects.md = DatabaseObjects.md
 		docs\ProgressTracker.md = docs\ProgressTracker.md
 		docs\RoadMapDesign.md = docs\RoadMapDesign.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{10FD181A-2A43-4EE7-840B-31535BF5EA6A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{CADEA713-134F-4D52-9DD3-2DB9EEBFC4AD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tables", "Tables", "{0FEAB43B-20EB-4CDB-B591-57BA6445C725}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StoredProcedures", "StoredProcedures", "{710479DC-E2CE-46BF-8CFB-526F9FFED394}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkPlanner.Web", "WorkPlanner.Web", "{8B1D5E76-B5E8-4E9D-A992-6F6959487B8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkPlanner.Web", "src\WorkPlanner.Web\WorkPlanner.Web.csproj", "{0FCC5C60-E3DD-0923-A8B5-635A5DD770A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{C43AD217-9980-44F1-936C-F9B9F3B25B8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StoredProcedures", "StoredProcedures", "{2801290F-16DE-4728-81E7-3AC15F4EB13C}"
+	ProjectSection(SolutionItems) = preProject
+		database\StoredProcedures\sp_GetDashboardStats.sql = database\StoredProcedures\sp_GetDashboardStats.sql
+		database\StoredProcedures\sp_GetOverDueTasks.sql = database\StoredProcedures\sp_GetOverDueTasks.sql
+		database\StoredProcedures\sp_SearchTasks.sql = database\StoredProcedures\sp_SearchTasks.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tables", "Tables", "{EB95AA95-AA94-4575-8A61-BA167AFC0732}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{59DC779D-03DE-402D-A85C-DBB33DC688AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,10 +46,11 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0FEAB43B-20EB-4CDB-B591-57BA6445C725} = {CADEA713-134F-4D52-9DD3-2DB9EEBFC4AD}
-		{710479DC-E2CE-46BF-8CFB-526F9FFED394} = {CADEA713-134F-4D52-9DD3-2DB9EEBFC4AD}
 		{8B1D5E76-B5E8-4E9D-A992-6F6959487B8D} = {10FD181A-2A43-4EE7-840B-31535BF5EA6A}
 		{0FCC5C60-E3DD-0923-A8B5-635A5DD770A8} = {8B1D5E76-B5E8-4E9D-A992-6F6959487B8D}
+		{2801290F-16DE-4728-81E7-3AC15F4EB13C} = {C43AD217-9980-44F1-936C-F9B9F3B25B8F}
+		{EB95AA95-AA94-4575-8A61-BA167AFC0732} = {C43AD217-9980-44F1-936C-F9B9F3B25B8F}
+		{59DC779D-03DE-402D-A85C-DBB33DC688AC} = {C43AD217-9980-44F1-936C-F9B9F3B25B8F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD2F80F0-980C-44DC-9470-55422CA8DF58}

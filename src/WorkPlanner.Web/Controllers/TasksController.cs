@@ -28,30 +28,23 @@ public class TasksController : Controller
     //}
 
     public async Task<IActionResult> Index(
-    string searchTerm,
-    WorkPlanner.Web.Enums.TaskStatus? status,
-    TaskPriority? priority)
+     string searchTerm,
+     WorkPlanner.Web.Enums.TaskStatus? status,
+     TaskPriority? priority)
     {
-        var tasks = _context.Tasks.AsQueryable();
+        var result = await _context.Tasks
+            .FromSqlInterpolated($@"
+            EXEC dbo.sp_SearchTasks
+                @SearchTerm={searchTerm},
+                @Status={(int?)status},
+                @Priority={(int?)priority}")
+            .ToListAsync();
 
-        if (!string.IsNullOrWhiteSpace(searchTerm))
-        {
-            tasks = tasks.Where(t =>
-                t.Title.Contains(searchTerm));
-        }
+        ViewBag.SearchTerm = searchTerm;
+        ViewBag.Status = status;
+        ViewBag.Priority = priority;
 
-        if (!string.IsNullOrEmpty(status.ToString()) && status.HasValue)
-        {
-            tasks = tasks.Where(t => t.Status == status);
-        }
-
-        if (priority.HasValue)
-        {
-            tasks = tasks.Where(t =>
-                t.Priority == priority);
-        }
-
-        return View(await tasks.ToListAsync());
+        return View(result);
     }
 
     // GET: TASKITEMS/Details/5

@@ -29,8 +29,11 @@ namespace WorkPlanner.Controllers
                             .OrderByDescending(t => t.CreatedDate)
                             .Take(5)
                             .ToListAsync();
+            var dashboardStats = _context.DashboardStats
+                            .FromSqlRaw("EXEC dbo.sp_GetDashboardStats")
+                            .AsEnumerable()
+                            .SingleOrDefault();
 
-            
 
             var model = new DashboardViewModel
             {

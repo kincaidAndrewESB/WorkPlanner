@@ -33,7 +33,8 @@
         <div class="col-md-6">
 
             <input type="text"
-                   name="searchTerm"
+                   name="searchTerm"                   
+                   value="@ViewBag.SearchTerm"
                    class="form-control"
                    placeholder="Search tasks..." />
 
@@ -59,8 +60,11 @@
 
             @foreach (var status in Enum.GetValues<WorkPlanner.Web.Enums.TaskStatus>())
             {
-                <option value="@status">
+                <option value="@status"
+                        selected="@(ViewBag.Status?.ToString() == status.ToString())">
+
                     @status
+
                 </option>
             }
 
@@ -78,7 +82,7 @@
             @foreach (var priority in Enum.GetValues<TaskPriority>())
             {
                 <option value="@priority">
-                    @priority
+                    selected="@(ViewBag.Priority?.ToString() == priority.ToString())">
                 </option>
             }
 

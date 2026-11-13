@@ -10,6 +10,7 @@ namespace WorkPlanner.Web.Data
         { }
 
         public DbSet<TaskItem> Tasks { get; set; }
+        public DbSet<DashboardStats> DashboardStats { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +27,9 @@ namespace WorkPlanner.Web.Data
             modelBuilder.Entity<TaskItem>()
                 .Property(t => t.Priority)
                 .HasConversion<string>();
+
+            modelBuilder.Entity<DashboardStats>()
+                .HasNoKey();
         }
     }
 }
